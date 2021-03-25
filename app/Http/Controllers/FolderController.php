@@ -14,7 +14,8 @@ class FolderController extends Controller
      */
     public function index()
     {
-        //
+        $data['folders'] = Folder::all();
+        return view('folders', $data);
     }
 
     /**
@@ -44,9 +45,11 @@ class FolderController extends Controller
      * @param  \App\Folder  $folder
      * @return \Illuminate\Http\Response
      */
-    public function show(Folder $folder)
+    public function show(Folder $id)
     {
-        //
+        $data['folder'] = $id->first();
+
+        return view('materials', $data);
     }
 
     /**

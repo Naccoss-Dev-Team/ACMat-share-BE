@@ -15,6 +15,12 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('url');
+            $table->unsignedBigInteger('owner')->nullable();
+            $table->unsignedBigInteger('folder_id')->nullable();
+            $table->string('description')->nullable();
+            $table->string('file_extension')->nullable();
             $table->timestamps();
         });
     }

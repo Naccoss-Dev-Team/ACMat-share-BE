@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MaterialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+    if (auth()->check())
+        return  redirect()->route('home');
+
+    return redirect()->route('login');
+//    return view('welcome');
+});
+Route::post('/', [MaterialController::class, 'store'])->name('upload');
+Route::get('{id?}/materials', [\App\Http\Controllers\FolderController::class, 'show'])->name('materials');
+Route::get('folders', [\App\Http\Controllers\FolderController::class, 'index'])->name('folders');
+

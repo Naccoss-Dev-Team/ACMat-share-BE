@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Folder;
 use App\Material;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,25 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'file' => 'required|mimes:pdf,docs,docx',
+            'folder' => 'required'
+        ]);
+        $folder = Folder::firstOrcreate(['name' => $request->folder]);
+        try {
+            $material = $request->file->Store('materials');
+            Material::create([
+                'url' => $material,
+                'name' => $request->file->getClientOriginalName(),
+                'folder_id' => $folder->id,
+                'owner' => auth()->user()->id,
+                'file_extension' => $request->file->extension()
+            ]);
+            $request->session()->flash('success', 'File Successfully Uploaded');
+        }catch (\Exception $e) {
+            $request->session()->flash('error', $e->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
