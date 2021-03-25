@@ -57,6 +57,7 @@ return [
             'database' => $database,
             'username' => $username,
             'password' => $password,
+            'port' => env('DB_PORT', '3306'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
