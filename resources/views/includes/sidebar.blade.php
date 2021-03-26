@@ -45,9 +45,22 @@
                         <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
                     </a>
                     <ul id="mydrive" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                        @forelse(\App\Folder::whereOwner(auth()->user()->id)->get() as $folder)
+                            <li class=" ">
+                                <a href="{{route('materials', $folder->id)}}">
+                                    <i class="lab la-blogger-b"></i><span>{{$folder->name}}</span>
+                                </a>
+                            </li>
+                        @empty
+{{--                            <li class=" ">--}}
+{{--                                <a href="{{route('myFiles')}}">--}}
+{{--                                    <i class="lab la-blogger-b"></i><span>My Files</span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+                        @endforelse
                         <li class=" ">
-                            <a href="/backend/folder-1.html">
-                                <i class="lab la-blogger-b"></i><span>Year 1</span>
+                            <a href="{{route('myFiles')}}">
+                                <i class="lab la-blogger-b"></i><span>All Files</span>
                             </a>
                         </li>
 

@@ -25,7 +25,13 @@ Route::get('/', function () {
     return redirect()->route('login');
 //    return view('welcome');
 });
-Route::post('/', [MaterialController::class, 'store'])->name('upload');
-Route::get('{id?}/materials', [\App\Http\Controllers\FolderController::class, 'show'])->name('materials');
-Route::get('folders', [\App\Http\Controllers\FolderController::class, 'index'])->name('folders');
+Route::group(['middleware' => 'auth'], function (){
+    Route::post('/', [MaterialController::class, 'store'])->name('upload');
+    Route::get('{id?}/materials', [\App\Http\Controllers\FolderController::class, 'show'])->name('materials');
+    Route::get('folders', [\App\Http\Controllers\FolderController::class, 'index'])->name('folders');
+    Route::get('my-files', [\App\Http\Controllers\MaterialController::class, 'myFiles'])->name('myFiles');
+    Route::get('{id}/download', [\App\Http\Controllers\MaterialController::class, 'download'])->name('download');
+});
+
+Route::get('{id?}/file-download', [\App\Http\Controllers\MaterialController::class, 'downloadWindow'])->name('download_window');
 

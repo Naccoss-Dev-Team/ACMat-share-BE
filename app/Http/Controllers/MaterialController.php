@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Folder;
 use App\Material;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MaterialController extends Controller
 {
@@ -100,5 +101,25 @@ class MaterialController extends Controller
     public function destroy(Material $material)
     {
         //
+    }
+
+    public function myFiles()
+    {
+        $data['materials'] = Material::whereOwner(auth()->user()->id)->get();
+        return view('my_files', $data);
+    }
+
+    public function download($id)
+    {
+        $material = Material::find($id);
+        $path= storage_path('app/'.$material->url);
+
+        return response()->download($path);
+    }
+
+    public function downloadWindow($id)
+    {
+        $material['material'] = Material::find($id);
+        return view('download', $material);
     }
 }
