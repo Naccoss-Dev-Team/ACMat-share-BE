@@ -26,6 +26,9 @@ Route::get('/', function () {
 //    return view('welcome');
 });
 Route::group(['middleware' => 'auth'], function (){
+    Route::get('/profile', [\App\Http\Controllers\UserController::class, 'edit'])->name('profile');
+    Route::post('/profile/password', [\App\Http\Controllers\UserController::class, 'updatePassword'])->name('profile.password');
+    Route::post('/profile', [\App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
     Route::post('/', [MaterialController::class, 'store'])->name('upload');
     Route::get('{id?}/materials', [\App\Http\Controllers\FolderController::class, 'show'])->name('materials');
     Route::get('folders', [\App\Http\Controllers\FolderController::class, 'index'])->name('folders');

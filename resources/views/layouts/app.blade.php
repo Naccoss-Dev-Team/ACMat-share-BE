@@ -28,7 +28,7 @@
             <nav class="navbar navbar-expand-lg navbar-light mt-2">
                 <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                     <i class="ri-menu-2-line wrapper-menu"></i>
-                    <a href="/backend/dashboard.html" class="header-logo">
+                    <a href="{{url('/')}}" class="header-logo">
                         <img src="../assets/images/logo.png" class="img-fluid rounded-normal light-logo" alt="logo">
                         <img src="../assets/images/logo-white.png" class="img-fluid rounded-normal darkmode-logo" alt="logo">
                     </a>

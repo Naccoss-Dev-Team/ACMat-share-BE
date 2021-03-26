@@ -26,7 +26,7 @@
                     </ul>
                 </li>
                 <li class=" ">
-                    <a href="/app/user-profile-edit.html" class="">
+                    <a href="{{route('profile')}}" class="">
                         <i class="las la-stopwatch iq-arrow-left"></i><span>My Profile</span>
                     </a>
                     <ul id="profile" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle"></ul>
